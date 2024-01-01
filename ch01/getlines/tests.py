@@ -66,11 +66,6 @@ class TestCase(unittest.TestCase):
 		self._test(b'012\n', b'012\n', 5)
 		self._test(b'012\n', b'012\n', 6)
 
-	def test_multiline_blanks(self):
-		self._test(b'\n\n', b'\n\n', 2)
-		self._test(b'\n\n', b'\n\n', 3)
-		self._test(b'\n\n\n', b'\n\n\n', 2)
-		self._test(b'\n\n\n', b'\n\n\n', 3)
 
 	def test_multiline_blanks(self):
 		self._test(b'\n\n', b'\n\n', 2)
