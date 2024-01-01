@@ -37,9 +37,7 @@ int get_line(char* buf, int buf_len) {
 
 	buf[0] = '\0';
 
-	while (1) {
-		c = getchar();
-		if (c == EOF) break;
+	while ( (c=getchar()) != EOF ) {
 		++num_read;
 
 		const int is_newline = c == '\n';
