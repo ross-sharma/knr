@@ -1,6 +1,8 @@
 import unittest
 import subprocess
 import os
+import sys
+
 
 def compile():
 	ret = os.system("gcc *.c")
@@ -9,13 +11,12 @@ def compile():
 	print("Compiled.")
 
 
-def get_result(in_bytes: bytes) -> bytes:
+def get_result(in_bytes: bytes, args: list[str]) -> bytes:
 	proc = subprocess.Popen(
-		"./a.out",
-		shell=True,
+		["./a.out"] + args,
 		stdin=subprocess.PIPE,
 		stdout=subprocess.PIPE,
-		stderr=subprocess.STDOUT
+		stderr=sys.stderr,
 	)
 
 	try:
@@ -34,7 +35,16 @@ class DetabTestCase(unittest.TestCase):
 	def setUpClass():
 		compile()
 
+	def _test(self, in_bytes: bytes, expected_out_bytes: bytes, buf_len: int):
+		actual_out_bytes = get_result(
+			in_bytes, 
+			[str(buf_len)],
+		)
+		self.assertEqual(expected_out_bytes, actual_out_bytes)
+
 	def test_hello(self):
-		result = get_result(b"abc")
-		self.assertEqual(result, b'abc')
+		self._test(b'', b'', 10)
+		self._test(b'a', b'a', 10)
+		self._test(b'a\n', b'a\n', 10)
+		
 
