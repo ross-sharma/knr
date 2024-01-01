@@ -43,7 +43,8 @@ class TestCase(unittest.TestCase):
 		self.assertEqual(expected_out_bytes, actual_out_bytes)
 
 	def test_empty(self):
-		self._test(b'', b'', 2)
+		self._test(b'', b'', 2) 
+		self._test(b'', b'', 3) 
 
 
 	def test_empty_newlines(self):
