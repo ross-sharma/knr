@@ -78,3 +78,7 @@ class TestCase(unittest.TestCase):
 		self._test(b'\n\n\n', b'\n\n\n', 3)
 		
 
+	def test_multiline_content(self):
+		self._test(b'012\n\n', b'\n\n', 2)
+		self._test(b'012\n345', b'0\n34', 3)
+		self._test(b'012\n345\n', b'0\n3\n', 3)

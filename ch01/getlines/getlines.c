@@ -32,20 +32,22 @@ int main(int argc, char** argv) {
 
 int get_line(char* buf, int buf_len) {
 	int c;
-	int i = 0;
+	int i = -1;
 	int num_read = 0;
-	int is_newline;
 
 	buf[0] = '\0';
 
 	while (1) {
 		c = getchar();
 		if (c == EOF) break;
-
-		is_newline = c == '\n';
-		buf[i] = c;
 		++num_read;
-		i = increment(i, buf_len);
+
+		int is_newline = c == '\n';
+		int next_i = increment(i, buf_len);
+		int is_overwrite = (next_i == i);
+
+		i = next_i;
+		if (is_newline || !is_overwrite) buf[i] = c;
 		if (is_newline) break;
 	}
 
