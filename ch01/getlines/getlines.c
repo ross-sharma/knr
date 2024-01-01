@@ -2,7 +2,6 @@
 #include "stdlib.h"
 
 int get_line(char* buf, int buf_len);
-int increment(int i, int buf_len);
 
 
 int main(int argc, char** argv) {
@@ -31,6 +30,7 @@ int main(int argc, char** argv) {
 
 
 int get_line(char* buf, int buf_len) {
+	const int max_i = buf_len - 2;
 	int c;
 	int i = -1;
 	int num_read = 0;
@@ -42,9 +42,9 @@ int get_line(char* buf, int buf_len) {
 		if (c == EOF) break;
 		++num_read;
 
-		int is_newline = c == '\n';
-		int next_i = increment(i, buf_len);
-		int is_overwrite = (next_i == i);
+		const int is_newline = c == '\n';
+		const int next_i = (i+1 <= max_i) ? i+1 : max_i;
+		const int is_overwrite = (next_i == i);
 
 		i = next_i;
 		if (is_newline || !is_overwrite) buf[i] = c;
@@ -53,12 +53,5 @@ int get_line(char* buf, int buf_len) {
 
 	buf[i+1] = '\0';
 	return num_read;
-}
-
-
-int increment(int i, int buf_len) {
-	int max = buf_len - 2;
-	if (i+1 <= max) return i+1;
-	return max;
 }
 
