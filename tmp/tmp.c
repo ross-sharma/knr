@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 int main() {
-	char x = 63;
-	printf("%d\n", x);
-	x = x + 1;
-	printf("%d\n", x);
+	int num = 64;
+	int res = num / 7;
+	return res;
 }
