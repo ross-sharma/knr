@@ -1,7 +1,9 @@
 #include <stdio.h>
 
-int main() {
-	int num = 64;
-	int res = num / 7;
-	return res;
+int main(int argc, char** argv) {
+	printf("argc = %d\n", argc);
+	for (int i = 0; i < argc; i++) {
+		printf("%d --> '%s'\n", i, argv[i]);
+	}	
 }
+
